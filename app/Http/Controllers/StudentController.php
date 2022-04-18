@@ -21,7 +21,7 @@ class StudentController extends Controller
         $student->save();
 
         return response()->json([
-            "message" => 'Data successfully created'
+            "message" => "Data successfully created"
         ], 201);
     }
 
@@ -32,7 +32,7 @@ class StudentController extends Controller
         $student->save();
         
         return response()->json([
-            "message" => 'Data successfully updated'
+            "message" => "Data successfully updated"
         ], 201);
     }
 
@@ -42,7 +42,20 @@ class StudentController extends Controller
         $student->delete();
 
         return response()->json([
-            "message" => 'Data successfully deleted'
+            "message" => "Data successfully deleted"
         ], 201);;
+    }
+
+    public function getStudent($id)
+    {
+        if (Student::where('id', $id)->exists())
+        {
+            $student = Student::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            return response($student, 200);
+        } else {
+            return response()->json([
+                "message" => "Data not found"
+            ], 404);
+        }
     }
 }
