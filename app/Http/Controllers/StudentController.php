@@ -20,7 +20,9 @@ class StudentController extends Controller
         $student->address = $request->address;
         $student->save();
 
-        return 'Data successfully created';
+        return response()->json([
+            "message" => 'Data successfully created'
+        ], 201);
     }
 
     public function update(Request $request, $id)
@@ -28,8 +30,10 @@ class StudentController extends Controller
         $student = Student::find($id);
         $student->update($request->all());
         $student->save();
-
-        return 'Data successfully updated';
+        
+        return response()->json([
+            "message" => 'Data successfully updated'
+        ], 201);
     }
 
     public function delete($id)
@@ -37,6 +41,8 @@ class StudentController extends Controller
         $student = Student::find($id);
         $student->delete();
 
-        return 'Data successfully deleted';
+        return response()->json([
+            "message" => 'Data successfully deleted'
+        ], 201);;
     }
 }
